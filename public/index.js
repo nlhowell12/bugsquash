@@ -97,7 +97,7 @@ function animate(obj) {
 function onTick() {
     let elapsed = (Date.now() - startTime)/1000;
     //console.log(elapsed);
-    countdown = 2 - Math.floor(elapsed);
+    countdown = 20 - Math.floor(elapsed);
     if(countdown >= 0) {
         countdownSpan.innerHTML = countdown;
         scoreSpan.innerHTML = score;
