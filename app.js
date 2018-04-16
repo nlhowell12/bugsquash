@@ -16,6 +16,7 @@ app.post("/scores", (req, res) => {
   scores.push(req.body);
   scores.sort((a,b) => (b.score - a.score));
   scores = scores.slice(0,3);
+  console.log(scores)
   res.status(201);
   res.end();
 });

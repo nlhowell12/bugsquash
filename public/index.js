@@ -5,15 +5,40 @@ let scoreSpan = document.getElementById("scoreSpan")
 let countdown = 10, score = 0;
 let startTime;
 
+const scoresURL = "http://localhost:3000/scores";
+
+
 function gameOver() {
     // This is the function that gets called when the game is over.
     // Update this to post the new score to the server.
+    const newScore = {
+        name: playerName,
+        score: score,
+    };
+    const postScore = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newScore),
+    };
+        
+    fetch(scoresURL, postScore)
+    .catch(error => { 
+        console.log("Post Broke")
+    }) 
     window.alert("You squashed " + score + " bugs!");
+    
+    fetch(scoresURL)
+    .then(response => response.json())
+    .then(scores => {
+        let highScores = document.getElementById("highScores");
+        highScores.innerHTML = scores.map(score => `${score.name}: ${score.score}`).join("<br />");
+    })
 }
 
 function playGame() {
     playerName = document.getElementById("playerName").value;
-    console.log(playerName);
     if(playerName.length<3) {
         alert("You must enter your name before playing.");
         return;
@@ -72,7 +97,7 @@ function animate(obj) {
 function onTick() {
     let elapsed = (Date.now() - startTime)/1000;
     //console.log(elapsed);
-    countdown = 20 - Math.floor(elapsed);
+    countdown = 2 - Math.floor(elapsed);
     if(countdown >= 0) {
         countdownSpan.innerHTML = countdown;
         scoreSpan.innerHTML = score;

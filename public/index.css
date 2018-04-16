@@ -13,7 +13,14 @@ span {font-size: 20px;}
 .splat {opacity: 0.4;}
 .popup {animation-duration: 1000ms; animation-name: popup; animation-iteration-count: 1;}
 .hideagain {animation-duration: 1000ms; animation-name: hideagain; animation-iteration-count: 1;}
-
+#highScores {
+    display: flex;
+    position: absolute;
+    border: 2px solid black;
+    height: 200px;
+    min-width: 100px;
+    left: 500px;
+}
 @keyframes popup {
     from {
       top: 70px; 
